@@ -1188,7 +1188,7 @@ int main()
             lib.append(_build_lib_grpkg)
             lib.append(_build_3rdparty)
             if self.isLinuxOrDarwin:
-                libs = ["GKS"]
+                libs=[self.get_ext_filename('GKS').replace(get_config_var("SO"),'')]
             else:
                 libs = ["libGKS"]
                 lib.append(os.path.join(_build_temp, "Release", "lib", "gks"))
@@ -1235,7 +1235,7 @@ int main()
                 staticlibs = [_libpng, _libjpeg, _libz]
                 ldflags.extend(staticlibs)
                 if self.isLinuxOrDarwin:
-                    libs.append("GR")
+                    libs.append(self.get_ext_filename('GR').replace(get_config_var("SO"),''))
                 if self.isDarwin:
                     ldflags.append("-Wl,-install_name,@rpath/libGR3.so")
                     ldflags.append("-Wl,-rpath,@loader_path/../gr/.")
